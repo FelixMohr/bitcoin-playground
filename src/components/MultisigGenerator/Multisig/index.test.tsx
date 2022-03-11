@@ -19,11 +19,11 @@ describe('SegWit', () => {
 
   it('should generate correct multisig address', () => {
     act(() => {
-      let error = false;
+      let error = '';
       render(
         <Multisig
-          onError={function (): void {
-            error = true;
+          onError={function (e): void {
+            error = e;
           }}
           m={2}
           addresses={[

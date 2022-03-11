@@ -19,15 +19,15 @@ describe('SegWit', () => {
 
   it('should generate correct address for seed/path 1', () => {
     act(() => {
-      let error = false;
+      let error = '';
       render(
         <SegWit
           mnemonic={
             'convince engine viable witness muscle private car flee always avocado silk oval'
           }
           path={"m/84'/0'/0'/0/0"}
-          onError={function (): void {
-            error = true;
+          onError={function (e): void {
+            error = e;
           }}
         />,
         container
@@ -42,15 +42,15 @@ describe('SegWit', () => {
 
   it('should generate correct address for seed/path 2', () => {
     act(() => {
-      let error = false;
+      let error = '';
       render(
         <SegWit
           mnemonic={
             'convince engine viable witness muscle private car flee always avocado silk oval'
           }
           path={"m/84'/0'/0'/0/11"}
-          onError={function (): void {
-            error = true;
+          onError={function (e): void {
+            error = e;
           }}
         />,
         container

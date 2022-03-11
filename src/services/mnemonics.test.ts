@@ -1,4 +1,4 @@
-import { getMnemonic } from './getMnemonic';
+import { getMnemonic, validateMnemonicWord } from './mnemonics';
 import { getDefaultWordlist, wordlists, validateMnemonic } from 'bip39';
 import crypto from 'crypto';
 
@@ -18,5 +18,17 @@ describe('getMnemonic', () => {
     const words = wordlists[getDefaultWordlist()];
     expect(mnemonic.every((word) => words.includes(word))).toBeTruthy();
     expect(validateMnemonic(mnemonic.join(' '))).toBeTruthy();
+  });
+});
+
+describe('validateMnemonicWord', () => {
+  it('should detect valid word', () => {
+    const valid = validateMnemonicWord('engine');
+    expect(valid).toBeTruthy();
+  });
+
+  it('should detect invalid word', () => {
+    const valid = validateMnemonicWord('abcdefg');
+    expect(valid).toBeFalsy();
   });
 });

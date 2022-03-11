@@ -4,28 +4,30 @@ import { payments } from 'bitcoinjs-lib';
 export const useMultisignatureAddress = (
   m: number,
   addresses: string[],
-  onError: (error: string) => void
+  onError?: (error: string) => void
 ) => {
   const address = useMemo(() => {
     const n = addresses.length;
     if (m > n) {
-      onError('m should be less than/equal n');
+      onError && onError('m should be less than/equal n');
       return '';
     } else if (!addresses.length) {
-      onError('No signing addresses provided');
+      onError && onError('No signing addresses provided');
       return '';
     }
-    const { address } = payments.p2sh({
-      redeem: payments.p2ms({
-        m,
-        pubkeys: addresses.map((a) => Buffer.from(a, 'hex')),
-      }),
-    });
-    if (!address) {
-      onError('Unable to generate address');
-      return '';
-    } else {
+    try {
+      const { address } = payments.p2sh({
+        redeem: payments.p2ms({
+          m,
+          pubkeys: addresses.map((a) => Buffer.from(a, 'hex')),
+        }),
+      });
+      onError && onError('');
       return address;
+    } catch (e) {
+      console.error(e);
+      onError && onError(`${e}`);
+      return '';
     }
   }, [addresses, m, onError]);
 

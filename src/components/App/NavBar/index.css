@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .nav-link {
+    @apply text-white pr-3 md:pr-6 font-light hover:text-gray-200 text-base md:text-lg;
+  }
+}
