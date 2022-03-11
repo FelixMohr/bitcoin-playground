@@ -7,8 +7,17 @@ type MultisigParams = {
   n: string;
 };
 
-const getSubtitle = () => {
-  return <>Enter parameters and addresses.</>;
+const getSubtitle = (loadExample: () => void) => {
+  return (
+    <>
+      Enter parameters and addresses or{' '}
+      <a onClick={loadExample} className="default-link">
+        {' '}
+        load an example
+      </a>
+      .
+    </>
+  );
 };
 
 function GeneratedAddress(m: number, addresses: string[]) {
@@ -30,8 +39,8 @@ const maxNAddresses = 5;
 
 export default function MultisigGenerator() {
   const [multisigParams, setMultisigParams] = useState<MultisigParams>({
-    m: '2',
-    n: '3',
+    m: '0',
+    n: '0',
   });
   const [addresses, setAddresses] = useState<string[]>([]);
   const [m, n] = useMemo(() => {
@@ -50,9 +59,20 @@ export default function MultisigGenerator() {
       });
     }
   }, [addresses.length, n]);
+  const loadExample = () => {
+    setMultisigParams({ m: '2', n: '3' });
+    setAddresses([
+      '0491bba2510912a5bd37da1fb5b1673010e43d2c6d812c514e91bfa9f2eb129e1c183329db55bd868e209aac2fbc02cb33d98fe74bf23f0c235d6126b1d8334f86',
+      '04865c40293a680cb9c020e7b1e106d8c1916d3cef99aa431a56d253e69256dac09ef122b1a986818a7cb624532f062c1d1f8722084861c5c3291ccffef4ec6874',
+      '048d2455d2403e08708fc1f556002f1b6cd83f992d085097f9974ab08a28838f07896fbab08f39495e15fa6fad6edbfb1e754e35fa1c7844c41f322a1863d46213',
+    ]);
+  };
 
   return (
-    <PageWithTitles title="Multisig Address Generator" subtitle={getSubtitle()}>
+    <PageWithTitles
+      title="Multisig Address Generator"
+      subtitle={getSubtitle(loadExample)}
+    >
       <div className="max-w-3xl mx-auto pb-8">
         <div className="grid grid-cols-3 gap-6">
           <input
@@ -75,7 +95,7 @@ export default function MultisigGenerator() {
             type="number"
             placeholder={'m'}
             className={`full-input ${
-              (m !== 0 && m <= n) || !multisigParams.m
+              (m >= 0 && m <= n) || !multisigParams.m
                 ? 'outline-gray-600 bg-gray-200'
                 : 'outline-red-600 bg-red-200'
             }`}
