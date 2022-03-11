@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/bitcoin-playground/static/css/main.f25e05f0.css",
-    "main.js": "/bitcoin-playground/static/js/main.86fc3f96.js",
+    "main.js": "/bitcoin-playground/static/js/main.78ea6213.js",
     "index.html": "/bitcoin-playground/index.html",
     "main.f25e05f0.css.map": "/bitcoin-playground/static/css/main.f25e05f0.css.map",
-    "main.86fc3f96.js.map": "/bitcoin-playground/static/js/main.86fc3f96.js.map"
+    "main.78ea6213.js.map": "/bitcoin-playground/static/js/main.78ea6213.js.map"
   },
   "entrypoints": [
     "static/css/main.f25e05f0.css",
-    "static/js/main.86fc3f96.js"
+    "static/js/main.78ea6213.js"
   ]
 }
